@@ -37,6 +37,7 @@ interface PlatformConfig {
   downloadUrl: string;
   registerUrl: string;
   registerDomain: string;
+  hasRegisterStep: boolean;
 }
 
 const PLATFORM_CONFIGS: Record<'paripulse' | 'megapari', PlatformConfig> = {
@@ -45,16 +46,18 @@ const PLATFORM_CONFIGS: Record<'paripulse' | 'megapari', PlatformConfig> = {
     subName: 'paripulse vip',
     logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQg6-yMiToAplqRqnBnaYACm49Od_26EabD95SDPxqLgg&s=10',
     downloadUrl: 'https://refpa22168.com/L?tag=d_3638295m_99042c_&site=3638295&ad=99042',
-    registerUrl: 'https://pari-pulse.com/Go3',
-    registerDomain: 'pari-pulse.com',
+    registerUrl: '',
+    registerDomain: '',
+    hasRegisterStep: false,
   },
   megapari: {
     name: 'Megapari',
     subName: 'megapari vip',
     logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQW7xleFw-FhsPX9OLzt91y0zWaLeDxos-cwVynaI-74Q&s=10',
     downloadUrl: 'https://refpazitag.top/L?tag=d_2926243m_54987c_&site=2926243&ad=54987',
-    registerUrl: 'https://refpazitag.top/L?tag=d_2926243m_54987c_&site=2926243&ad=54987',
-    registerDomain: 'megapari.com',
+    registerUrl: 'https://2787591.megapari-228091.com/',
+    registerDomain: '2787591.megapari-228091.com',
+    hasRegisterStep: true,
   },
 };
 
@@ -131,9 +134,15 @@ export default function ConditionPage({ initialPlatform, onBack, onSubmit }: Con
     }, 40);
   };
 
+  const totalSteps = currentPlatformConfig.hasRegisterStep ? 6 : 5;
   const completed =
-    (telegramJoined ? 1 : 0) + (platformInstalled ? 1 : 0) + (registered ? 1 : 0) + (copied ? 1 : 0) + 1 + (userId.trim().length >= 4 ? 1 : 0);
-  const pct = Math.round((completed / 6) * 100);
+    (telegramJoined ? 1 : 0) +
+    (platformInstalled ? 1 : 0) +
+    (currentPlatformConfig.hasRegisterStep ? (registered ? 1 : 0) : 0) +
+    (copied ? 1 : 0) +
+    1 +
+    (userId.trim().length >= 4 ? 1 : 0);
+  const pct = Math.round((completed / totalSteps) * 100);
 
   const stepShell =
     'relative rounded-[1.6rem] p-[1.2px] bg-gradient-to-bl from-crimson/35 via-white/[0.05] to-transparent';
@@ -224,7 +233,9 @@ export default function ConditionPage({ initialPlatform, onBack, onSubmit }: Con
             شروط <span className="text-crimson-bright glow-text-crimson-bright">التفعيل</span>
           </h2>
           <p className="text-[12.5px] text-slate-400 mt-3 max-w-xs mx-auto leading-relaxed font-medium">
-            أكمل الخطوات الست لربط حسابك وفتح خادم التوقعات
+            {currentPlatformConfig.hasRegisterStep
+              ? 'أكمل الخطوات الست لربط حسابك وفتح خادم التوقعات'
+              : 'أكمل الخطوات لربط حسابك وفتح خادم التوقعات'}
           </p>
 
           {/* Progress */}
@@ -232,7 +243,7 @@ export default function ConditionPage({ initialPlatform, onBack, onSubmit }: Con
             <div className="flex items-center justify-between mb-2.5">
               <span className="text-[10px] font-mono font-black text-white">{pct}%</span>
               <span className="text-[10px] text-slate-400 font-bold">
-                خطوات مكتملة <span className="font-mono text-crimson-bright">{completed}/6</span>
+                خطوات مكتملة <span className="font-mono text-crimson-bright">{completed}/{totalSteps}</span>
               </span>
             </div>
             <div className="h-1.5 w-full rounded-full bg-white/[0.06] overflow-hidden">
@@ -310,49 +321,51 @@ export default function ConditionPage({ initialPlatform, onBack, onSubmit }: Con
             </div>
           </div>
 
-          {/* 3 - official registration */}
-          <div className={stepShell}>
-            <div className={stepBody}>
-              <StepHead
-                n="03"
-                icon={<ExternalLink className="w-5 h-5" />}
-                title="التسجيل في الموقع الرسمي"
-                desc={`أنشئ حسابك على الموقع الرسمي لمنصة ${currentPlatformConfig.name}`}
-                done={registered}
-                label="step 3"
-              />
-              <button
-                type="button"
-                onClick={() => {
-                  window.open(currentPlatformConfig.registerUrl, '_blank');
-                  setRegistered(true);
-                }}
-                className="w-full flex items-center justify-between gap-3 px-4 py-3 rounded-2xl bg-black/60 border border-white/[0.06] hover:border-crimson/40 transition-all cursor-pointer"
-              >
-                <span
-                  className={`text-[10px] font-black px-3.5 py-1.5 rounded-xl ${
-                    registered
-                      ? 'bg-emerald-500/15 text-emerald-400 border border-emerald-500/25'
-                      : 'bg-crimson text-white shadow-[0_0_18px_-4px_rgba(255,0,51,0.8)]'
-                  }`}
+          {/* 3 - official registration (Megapari only) */}
+          {currentPlatformConfig.hasRegisterStep && (
+            <div className={stepShell}>
+              <div className={stepBody}>
+                <StepHead
+                  n="03"
+                  icon={<ExternalLink className="w-5 h-5" />}
+                  title="التسجيل في الموقع الرسمي"
+                  desc={`أنشئ حسابك على الموقع الرسمي لمنصة ${currentPlatformConfig.name}`}
+                  done={registered}
+                  label="step 3"
+                />
+                <button
+                  type="button"
+                  onClick={() => {
+                    window.open(currentPlatformConfig.registerUrl, '_blank');
+                    setRegistered(true);
+                  }}
+                  className="w-full flex items-center justify-between gap-3 px-4 py-3 rounded-2xl bg-black/60 border border-white/[0.06] hover:border-crimson/40 transition-all cursor-pointer"
                 >
-                  {registered ? '✓ تم' : 'تسجيل'}
-                </span>
-                <span className="text-[11.5px] font-bold text-slate-300">{currentPlatformConfig.registerDomain} — الموقع الرسمي</span>
-              </button>
+                  <span
+                    className={`text-[10px] font-black px-3.5 py-1.5 rounded-xl ${
+                      registered
+                        ? 'bg-emerald-500/15 text-emerald-400 border border-emerald-500/25'
+                        : 'bg-crimson text-white shadow-[0_0_18px_-4px_rgba(255,0,51,0.8)]'
+                    }`}
+                  >
+                    {registered ? '✓ تم' : 'تسجيل'}
+                  </span>
+                  <span className="text-[11.5px] font-bold text-slate-300">{currentPlatformConfig.registerDomain} — الموقع الرسمي</span>
+                </button>
+              </div>
             </div>
-          </div>
+          )}
 
-          {/* 4 - promo */}
+          {/* promo */}
           <div className={stepShell}>
             <div className={stepBody}>
               <StepHead
-                n="04"
+                n={currentPlatformConfig.hasRegisterStep ? '04' : '03'}
                 icon={<Ticket className="w-5 h-5" />}
                 title="كود الخصم عند التسجيل"
                 desc="انسخ الكود واستخدمه أثناء إنشاء الحساب"
                 done={copied}
-                label="step 4"
+                label={currentPlatformConfig.hasRegisterStep ? 'step 4' : 'step 3'}
               />
               <button
                 type="button"
@@ -370,16 +383,16 @@ export default function ConditionPage({ initialPlatform, onBack, onSubmit }: Con
             </div>
           </div>
 
-          {/* 5 - deposit */}
+          {/* deposit */}
           <div className={stepShell}>
             <div className={stepBody}>
               <StepHead
-                n="05"
+                n={currentPlatformConfig.hasRegisterStep ? '05' : '04'}
                 icon={<Wallet className="w-5 h-5" />}
                 title="الحد الأدنى للإيداع"
                 desc="الرصيد يظل ملكك بالكامل وقابل للسحب في أي وقت"
                 done={false}
-                label="step 5"
+                label={currentPlatformConfig.hasRegisterStep ? 'step 5' : 'step 4'}
               />
 
               <div className="flex items-center justify-center gap-3 px-4 py-4 rounded-2xl bg-black/60 border border-white/[0.06]">
@@ -394,16 +407,16 @@ export default function ConditionPage({ initialPlatform, onBack, onSubmit }: Con
             </div>
           </div>
 
-          {/* 6 - id */}
+          {/* id */}
           <div className={stepShell}>
             <div className={stepBody}>
               <StepHead
-                n="06"
+                n={currentPlatformConfig.hasRegisterStep ? '06' : '05'}
                 icon={<User className="w-5 h-5" />}
                 title="رقم حساب اللاعب (ID)"
                 desc="أدخل معرفك الرقمي لمطابقة الترخيص"
                 done={userId.trim().length >= 4}
-                label="step 6"
+                label={currentPlatformConfig.hasRegisterStep ? 'step 6' : 'step 5'}
               />
 
               <div className="flex items-center bg-black/70 rounded-2xl border border-white/[0.08] focus-within:border-crimson transition-all px-3">
