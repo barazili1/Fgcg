@@ -1,0 +1,6 @@
+{
+  "name": "Apple Hack — Prediction Utility",
+  "description": "Apple Hack: premium Apple of Fortune and Crash prediction utility with dynamic secure algorithmic predictions.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
