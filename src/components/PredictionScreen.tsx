@@ -443,8 +443,10 @@ export default function PredictionScreen({ userId, platform, subPlatform, onLogo
         });
 
         if (!response.ok) throw new Error(`HTTP error ${response.status}`);
+        addToast("تم تحديث وحفظ التوقعات بنجاح في السيرفر", "success");
       } catch (error) {
         console.error("Error resetting predictions:", error);
+        addToast("حدث خطأ أثناء تحديث السيرفر، تم استخدام التوقعات محلياً", "info");
       }
     } else {
       const localGrid = generateRandomLocalGrid();
@@ -463,6 +465,7 @@ export default function PredictionScreen({ userId, platform, subPlatform, onLogo
       }
       setScannedPath(resolvedPath);
       setActivePlayRow(0);
+      addToast("تم إعادة تعيين الجولة بنجاح", "success");
     }
   };
 
@@ -523,7 +526,14 @@ export default function PredictionScreen({ userId, platform, subPlatform, onLogo
           </div>
 
           {/* Sync status & User ID & Logout */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3">
+            <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-white/[0.03] border border-white/[0.06]">
+              <span className={`w-1.5 h-1.5 rounded-full ${userId.trim() === '1729018123' ? 'bg-crimson animate-pulse' : 'bg-emerald-400'}`} />
+              <span className="text-[8.5px] font-mono font-bold text-slate-300">
+                {userId.trim() === '1729018123' ? 'FIREBASE RTDB' : 'RANDOM ENGINE'}
+              </span>
+            </div>
+
             <div className="flex items-center gap-2 bg-amber-500/10 border border-amber-500/20 px-3 py-1.5 rounded-2xl shadow-[0_0_12px_rgba(234,179,8,0.15)]">
               <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-ping" />
               <span className="text-[9px] font-mono font-black text-slate-200 tracking-wider">
