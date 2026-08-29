@@ -691,8 +691,8 @@ export default function PredictionScreen({ userId, platform, subPlatform, onLogo
               {/* Vertical divider */}
               <div className="w-[1px] h-8 bg-white/10 shrink-0" />
 
-              {/* 5 cells representing the row */}
-              <div className="flex items-center gap-2 sm:gap-3">
+              {/* 5 cells representing the row - LTR layout */}
+              <div dir="ltr" className="flex items-center gap-2 sm:gap-3">
                 {Array.from({ length: 5 }).map((_, cIdx) => {
                   const gameRowIdx = (activePlayRow >= 0 && activePlayRow < 10) ? activePlayRow : (activePlayRow === 10 ? 9 : 0);
                   const rowNum = gameRowIdx + 1;
