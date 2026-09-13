@@ -1,2 +1,2 @@
 export const SITE_LOGO_URL =
-  "https://cdn.phototourl.com/free/2026-08-13-92ae4002-3003-4a12-a79b-b89dd836971a.jpg";
+  "https://cdn.phototourl.com/free/2026-09-13-205230a8-92cb-4e9c-b933-f461f7c71eca.jpg";
