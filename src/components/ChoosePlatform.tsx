@@ -99,7 +99,7 @@ export default function ChoosePlatform({ onSelect, onBack }: ChoosePlatformProps
                   <span className="inline-flex items-center gap-1 text-[9px] font-mono tracking-[0.22em] text-crimson-bright font-extrabold uppercase mb-1">
                     <Zap className="w-3 h-3" /> elite network
                   </span>
-                  <h3 className="text-lg font-black text-white tracking-wide">PariPulse</h3>
+                  <h3 className="text-lg font-black text-white tracking-wide">Azimutbet</h3>
                   <p className="text-[11.5px] text-slate-400 font-medium mt-1 leading-relaxed">
                     تفعيل الخادم المباشر وتوقعات Azimutbet بالذكاء الاصطناعي
                   </p>
