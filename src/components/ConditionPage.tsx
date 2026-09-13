@@ -22,7 +22,7 @@ interface ConditionPageProps {
   onBack: () => void;
   onSubmit: (
     userId: string,
-    platform: 'paripulse' | 'megapari',
+    platform: 'azimutbet' | 'megapari',
     subPlatform: string,
     depositScreenshot: string,
     promoScreenshot: string,
@@ -42,10 +42,10 @@ interface PlatformConfig {
 
 const PLATFORM_CONFIGS: Record<'paripulse' | 'megapari', PlatformConfig> = {
   paripulse: {
-    name: 'PariPulse',
-    subName: 'paripulse vip',
-    logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQg6-yMiToAplqRqnBnaYACm49Od_26EabD95SDPxqLgg&s=10',
-    downloadUrl: 'https://refpa22168.com/L?tag=d_3638295m_99042c_&site=3638295&ad=99042',
+    name: 'Azimutbet',
+    subName: 'azimutbet vip',
+    logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStsC1G5g8WJoCPE3J7QTGlwdSuCtMTDTQARps0aAbtqQ&s',
+    downloadUrl: 'http://refpa48172.com/L?tag=d_6075340m_178601c_&site=6075340&ad=178601',
     registerUrl: '',
     registerDomain: '',
     hasRegisterStep: false,
