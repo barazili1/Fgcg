@@ -3,7 +3,7 @@ import { ArrowLeft, Shield, Sparkles, Zap, ChevronLeft } from 'lucide-react';
 import { SITE_LOGO_URL } from '../lib/brand';
 
 interface ChoosePlatformProps {
-  onSelect: (platform: 'paripulse' | 'megapari') => void;
+  onSelect: (platform: 'azimutbet' | 'megapari') => void;
   onBack?: () => void;
 }
 
@@ -88,8 +88,8 @@ export default function ChoosePlatform({ onSelect, onBack }: ChoosePlatformProps
               <div className="flex items-center gap-4 flex-row-reverse text-right">
                 <div className="w-15 h-15 rounded-2xl overflow-hidden bg-black border border-crimson/25 shadow-lg group-hover:border-crimson/60 transition-all shrink-0">
                   <img
-                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQg6-yMiToAplqRqnBnaYACm49Od_26EabD95SDPxqLgg&s=10"
-                    alt="PariPulse"
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStsC1G5g8WJoCPE3J7QTGlwdSuCtMTDTQARps0aAbtqQ&s"
+                    alt="Azimutbet"
                     referrerPolicy="no-referrer"
                     className="w-full h-full object-cover"
                   />
@@ -101,7 +101,7 @@ export default function ChoosePlatform({ onSelect, onBack }: ChoosePlatformProps
                   </span>
                   <h3 className="text-lg font-black text-white tracking-wide">PariPulse</h3>
                   <p className="text-[11.5px] text-slate-400 font-medium mt-1 leading-relaxed">
-                    تفعيل الخادم المباشر وتوقعات PariPulse بالذكاء الاصطناعي
+                    تفعيل الخادم المباشر وتوقعات Azimutbet بالذكاء الاصطناعي
                   </p>
                 </div>
               </div>
